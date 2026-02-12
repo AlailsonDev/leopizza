@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEO PIZZA | A Melhor Pizza no Forno à Lenha do Ibura</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        'xs': '400px',
+                    },
+                    colors: {
+                        dark: '#050505',
+                        card: '#0a0a0a',
+                        accent: '#eab308', // Leo Pizza Gold/Yellow
+                        whatsapp: '#25d366',
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #eab308);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bento-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 py-6 transition-all duration-300" id="header">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="font-display text-xl xs:text-2xl font-extrabold tracking-tighter text-white">LEO PIZZA</span>
+                <div class="w-1.5 h-1.5 bg-accent rounded-full mb-1"></div>
+            </div>
+            
+            <nav class="hidden lg:flex items-center gap-10 text-sm font-medium tracking-wide uppercase">
+                <a href="#menu" class="hover:text-accent transition-colors">Destaques</a>
+                <a href="#diferenciais" class="hover:text-accent transition-colors">Diferenciais</a>
+                <a href="#avaliacoes" class="hover:text-accent transition-colors">Avaliações</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="https://wa.me/558188447375" target="_blank" class="hidden xs:flex bg-whatsapp p-2.5 rounded-full hover:scale-110 transition-transform">
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.633 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+                <a href="https://leo-pizza-ibura.ola.click" target="_blank" class="glass px-5 xs:px-6 py-2.5 xs:py-3 rounded-full text-[10px] xs:text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-500">
+                    Pedir Delivery
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden text-center bg-dark">
+        <!-- Background Image Container -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1574071318508-1cdbad80ad38?auto=format&fit=crop&q=80" 
+                 alt="Forno a Lenha Leo Pizza" 
+                 class="w-full h-full object-cover scale-110 opacity-60" 
+                 id="hero-img">
+            <!-- Camada de gradiente mais profunda para garantir legibilidade -->
+            <div class="absolute inset-0 bg-gradient-to-b from-dark/40 via-dark/70 to-dark"></div>
+            <div class="absolute inset-0 bg-black/30"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10 flex flex-col items-center justify-center">
+            <div class="flex justify-center mb-6" id="hero-badge">
+                <span class="glass px-4 py-1.5 rounded-full text-[8px] xs:text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                    PIZZA FEITA NO FORNO À LENHA
+                </span>
+            </div>
+            
+            <h1 class="font-display text-[1.8rem] xs:text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-[1.2] xs:leading-[1.1] md:leading-[0.85] tracking-tighter mb-8 stagger-hero w-full max-w-full mx-auto" id="hero-title">
+                TRADIÇÃO QUE <br class="xs:hidden"> <span class="text-gradient">CONQUISTA</span>
+            </h1>
+            
+            <p class="max-w-md xs:max-w-xl mx-auto text-sm xs:text-base md:text-lg text-zinc-300 mb-10 stagger-hero leading-relaxed px-4 font-medium drop-shadow-lg">
+                A melhor pizza do Ibura, preparada com carinho no forno a lenha para garantir aquele sabor defumado e massa crocante incomparável.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center stagger-hero w-full max-w-[280px] xs:max-w-none">
+                <a href="https://leo-pizza-ibura.ola.click" target="_blank" class="w-full sm:w-auto bg-accent text-black px-8 xs:px-10 py-4 xs:py-5 rounded-full font-bold uppercase tracking-widest text-[10px] xs:text-sm hover:scale-105 transition-transform animate-pulse-slow shadow-2xl">
+                    Cardápio & Pedidos
+                </a>
+                <a href="https://wa.me/558188447375" target="_blank" class="w-full sm:w-auto glass text-white px-8 xs:px-10 py-4 xs:py-5 rounded-full font-bold uppercase tracking-widest text-[10px] xs:text-sm hover:bg-whatsapp hover:border-whatsapp transition-all flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.633 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Falar no WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS MARQUEE -->
+    <section class="py-12 border-y border-white/5 bg-card/50">
+        <div class="marquee overflow-hidden">
+            <div class="marquee-content gap-20 py-4 items-center uppercase font-display italic font-semibold text-xl text-white/20 tracking-wider">
+                <span>⭐ 4.5 no Google</span>
+                <span>🔥 588 Comentários</span>
+                <span>🍕 Forno à Lenha</span>
+                <span>🏠 Ibura, Recife</span>
+                <span>🚀 Delivery Ágil</span>
+                <span>🍕 Calabresa & Catupiry</span>
+                <span>⭐ 4.5 no Google</span>
+                <span>🔥 588 Comentários</span>
+                <span>🍕 Forno à Lenha</span>
+                <span>🏠 Ibura, Recife</span>
+                <span>🚀 Delivery Ágil</span>
+                <span>🍕 Calabresa & Catupiry</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENTO GRID -->
+    <section id="diferenciais" class="py-24 container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 text-center md:text-left">
+            <div class="max-w-2xl">
+                <h2 class="font-display text-3xl md:text-5xl font-bold mb-6 reveal-up">O SABOR DO <span class="italic text-accent">IBURA</span></h2>
+                <p class="text-zinc-400 text-base md:text-lg reveal-up">Unimos agilidade, preço justo e a tradição do forno a lenha para criar a melhor pizza da região.</p>
+            </div>
+            <div class="reveal-up">
+                <span class="text-4xl font-display font-black text-accent">4.5/5</span>
+                <p class="text-xs uppercase tracking-widest font-bold text-zinc-500 mt-2 text-center md:text-right">Satisfação Total</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Delivery - NOVO BACKGROUND -->
+            <div class="bento-item glass p-8 md:col-span-2 reveal-up h-[400px] flex flex-col justify-between group">
+                <div class="absolute inset-0 z-0 opacity-40 transition-all duration-700 group-hover:scale-105 group-hover:opacity-60">
+                    <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&q=80" alt="Pizza Order" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/40"></div>
+                </div>
+                <div class="relative z-10">
+                    <span class="text-[10px] uppercase tracking-widest text-accent font-bold">Delivery Ágil</span>
+                    <h3 class="text-3xl font-bold mt-4 leading-tight text-white drop-shadow-md">A MELHOR PIZZA <br>DA REGIÃO</h3>
+                </div>
+                <div class="relative z-10">
+                    <p class="text-zinc-200 text-sm mb-6 font-medium bg-black/30 backdrop-blur-sm p-3 rounded-lg">Fome agora? Peça em segundos pelo nosso sistema de delivery ou ligue diretamente.</p>
+                    <div class="flex gap-3">
+                        <a href="https://leo-pizza-ibura.ola.click" target="_blank" class="bg-accent px-6 py-3 rounded-full text-black font-bold text-xs uppercase tracking-widest hover:scale-105 transition-transform">
+                            Pedir Agora
+                        </a>
+                        <a href="https://wa.me/558188447375" target="_blank" class="bg-whatsapp w-12 h-12 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.633 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Location Map -->
+            <div class="bento-item glass reveal-up h-[400px] md:col-span-2 group relative overflow-hidden">
+                <iframe 
+                    class="absolute inset-0 w-full h-full opacity-60 grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.782012111833!2d-34.939223!3d-8.1362094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1fa08d0e7647%3A0xc38379f67a36c86a!2sR.%20Val%C3%AA%20do%20Cariri%2C%2029%20-%20Ibura%2C%20Recife%20-%20PE%2C%2051300-000!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" 
+                    frameborder="0" 
+                    scrolling="no">
+                </iframe>
+                <div class="relative z-10 p-6 h-full flex flex-col justify-between pointer-events-none">
+                    <div class="glass p-4 rounded-xl inline-block self-start border-white/10 backdrop-blur-md">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-accent">ONDE ESTAMOS</h3>
+                        <p class="text-white text-[12px] mt-1 font-bold">R. Valê do Cariri, 29 - Ibura</p>
+                    </div>
+                    <a href="https://maps.google.com/?q=LEO+PIZZA+Ibura+Recife" target="_blank" class="pointer-events-auto bg-dark/90 backdrop-blur-sm px-4 py-2.5 rounded-full text-accent text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-accent hover:text-black transition-all w-fit shadow-2xl">
+                        Traçar Rota <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Best Sellers -->
+            <div class="bento-item bg-accent/5 p-8 reveal-up md:col-span-4 flex flex-col md:flex-row gap-10 items-center justify-between border border-white/5">
+                <div class="max-w-md">
+                    <span class="text-[10px] uppercase tracking-widest text-accent font-bold italic">Destaques do Cardápio</span>
+                    <h3 class="text-4xl font-black mt-4 font-display">OS FAVORITOS</h3>
+                    <p class="text-zinc-400 text-base mt-4">Calabresa crocante e Catupiry cremoso. Massa artesanal batida diariamente e recheio generoso no forno a lenha.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-6 w-full md:w-auto">
+                    <div class="group relative w-36 h-36 xs:w-44 xs:h-44 rounded-3xl overflow-hidden glass p-1 border-accent/20">
+                        <img src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&q=80" class="w-full h-full object-cover rounded-2xl" alt="Pizza Calabresa">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-xs font-black tracking-widest text-accent uppercase">Calabresa</span>
+                        </div>
+                    </div>
+                    <div class="group relative w-36 h-36 xs:w-44 xs:h-44 rounded-3xl overflow-hidden glass p-1 border-accent/20">
+                        <img src="https://images.unsplash.com/photo-1593504049359-74330189a3be?auto=format&fit=crop&q=80" class="w-full h-full object-cover rounded-2xl" alt="Pizza Catupiry">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-xs font-black tracking-widest text-accent uppercase">Catupiry</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="avaliacoes" class="py-24 container mx-auto px-6">
+        <h2 class="font-display text-4xl font-bold text-center mb-16 reveal-up">O QUE DIZEM NOSSOS <span class="italic text-accent">CLIENTES</span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass p-8 rounded-2xl reveal-up">
+                <div class="text-accent text-xs mb-6">★★★★★</div>
+                <p class="text-zinc-300 italic mb-8 leading-relaxed text-base">"Melhor pizza que já comi, atendimento ótimo, nota 10 muito top."</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold">JF</div>
+                    <div>
+                        <p class="font-bold text-xs">Jaqueline Ferreira</p>
+                        <p class="text-[9px] text-zinc-500 uppercase tracking-widest">Cliente no Google</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-2xl reveal-up bg-accent/5 border-accent/20 scale-105">
+                <div class="text-accent text-xs mb-6">★★★★★</div>
+                <p class="text-zinc-300 italic mb-8 leading-relaxed text-base">"Bom atendimento, pizzas saborosas. Uma das melhores da região!"</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold">DS</div>
+                    <div>
+                        <p class="font-bold text-xs">Deivid heide Santos</p>
+                        <p class="text-[9px] text-zinc-500 uppercase tracking-widest">Cliente Local</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-2xl reveal-up">
+                <div class="text-accent text-xs mb-6">★★★★★</div>
+                <p class="text-zinc-300 italic mb-8 leading-relaxed text-base">"Bom e barato. A melhor opção pra quem busca qualidade no Ibura."</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold">LB</div>
+                    <div>
+                        <p class="font-bold text-xs">leo blidado</p>
+                        <p class="text-[9px] text-zinc-500 uppercase tracking-widest">Local Guide</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="bg-gradient-to-r from-accent to-orange-600 rounded-[3rem] p-10 md:p-20 text-center text-black overflow-hidden relative shadow-2xl">
+                <div class="absolute inset-0 opacity-10">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80" alt="Pattern" class="w-full h-full object-cover">
+                </div>
+                <div class="relative z-10 flex flex-col items-center justify-center">
+                    <h2 class="font-display text-[1.4rem] xs:text-2xl sm:text-4xl md:text-6xl font-black mb-8 leading-tight">FOME DE <br class="xs:hidden"> PERFEIÇÃO?</h2>
+                    <p class="text-black/80 text-sm xs:text-base md:text-lg max-w-xl mx-auto mb-10 px-4 font-bold italic">Garanta agora sua pizza feita no capricho. Peça pelo link ou ligue diretamente.</p>
+                    <div class="flex flex-wrap justify-center gap-4 xs:gap-6 w-full px-4">
+                        <a href="https://leo-pizza-ibura.ola.click" target="_blank" class="flex-1 xs:flex-none bg-black text-white px-6 xs:px-10 py-4 xs:py-5 rounded-full font-black uppercase tracking-widest text-[9px] xs:text-xs hover:scale-110 transition-transform text-center shadow-lg">
+                            Fazer Pedido Online
+                        </a>
+                        <a href="https://wa.me/558188447375" target="_blank" class="flex-1 xs:flex-none bg-white text-whatsapp border border-whatsapp/20 px-6 xs:px-10 py-4 xs:py-5 rounded-full font-black uppercase tracking-widest text-[9px] xs:text-xs hover:bg-whatsapp hover:text-white transition-all text-center flex items-center justify-center gap-2">
+                            WhatsApp: 81 8844-7375
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-16 border-t border-white/5">
+        <div class="container mx-auto px-6 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-2">
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
+                        <span class="font-display text-2xl font-extrabold tracking-tighter text-white">LEO PIZZA</span>
+                        <div class="w-2 h-2 bg-accent rounded-full mb-1"></div>
+                    </div>
+                    <p class="text-zinc-500 max-w-sm mx-auto md:mx-0 mb-8 text-sm italic">
+                        "Pizza feita no forno à lenha com tradição e sabor inigualável no coração do Ibura."
+                    </p>
+                    <div class="flex justify-center md:justify-start gap-4">
+                        <a href="https://www.instagram.com/_leopizza/" target="_blank" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-accent hover:text-black transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://wa.me/558188447375" target="_blank" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-whatsapp hover:text-white transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.633 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-[10px] uppercase tracking-widest mb-6">Info Útil</h4>
+                    <ul class="text-zinc-500 space-y-3 text-xs">
+                        <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Abre às 17:00</li>
+                        <li>Forno à Lenha</li>
+                        <li>Ibura, Recife</li>
+                        <li>Massa Artesanal</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-[10px] uppercase tracking-widest mb-6">Contato</h4>
+                    <ul class="text-zinc-500 space-y-3 text-xs">
+                        <li>Tel: (81) 99747-3066</li>
+                        <li>Zap: (81) 8844-7375</li>
+                        <li>R. Valê do Cariri, 29 - Ibura</li>
+                        <li>Recife - PE</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-10 text-zinc-600 text-[9px] uppercase tracking-widest font-bold">
+                <p>© 2026 LEO PIZZA. PRODUZIDO COM TRADIÇÃO.</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacidade</a>
+                    <a href="#" class="hover:text-white">Termos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('glass', 'py-4');
+                header.classList.remove('py-6');
+            } else {
+                header.classList.remove('glass', 'py-4');
+                header.classList.add('py-6');
+            }
+        });
+
+        // Garantir que a imagem do Hero carregue e seja animada
+        const heroTimeline = gsap.timeline();
+        heroTimeline.from('#hero-img', {
+            scale: 1.4,
+            opacity: 0,
+            duration: 2.5,
+            ease: 'power4.out'
+        })
+        .from('#hero-badge', {
+            y: -50,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'back.out(1.7)'
+        }, "-=1.8")
+        .from('.stagger-hero', {
+            y: 100,
+            opacity: 0,
+            stagger: 0.15,
+            duration: 1.5,
+            ease: 'power4.out'
+        }, "-=1.4");
+
+        gsap.utils.toArray('.reveal-up').forEach((el) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1.2,
+                ease: 'power3.out'
+            });
+        });
+
+        gsap.utils.toArray('img').forEach(img => {
+            if (img.id !== 'hero-img') {
+                gsap.from(img, {
+                    scrollTrigger: {
+                        trigger: img,
+                        start: 'top 95%'
+                    },
+                    scale: 1.05,
+                    opacity: 0.7,
+                    duration: 1.5,
+                    ease: 'power2.out'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
